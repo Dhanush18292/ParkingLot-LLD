@@ -2,6 +2,7 @@ package service;
 
 import Stratergy.SpotAssignmentStrategy;
 import enums.SpotAssignmentStrategyType;
+import enums.TicketStatus;
 import enums.VehicleType;
 import factory.SpotAssignmentStrategyFactory;
 import model.Gate;
@@ -13,6 +14,7 @@ import repository.TicketRepo;
 import repository.VehicleRepository;
 
 import java.lang.reflect.Parameter;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 public class TicketService {
@@ -21,9 +23,14 @@ public class TicketService {
     private GateRepository gateRepository;
     private TicketRepo ticketRepo;
 
+    public TicketService(VehicleRepository vehicleRepository, GateRepository gateRepository, TicketRepo ticketRepo, int ticketCounter) {
+        this.vehicleRepository = vehicleRepository;
+        this.gateRepository = gateRepository;
+        this.ticketRepo = ticketRepo;
+        this.ticketCounter = ticketCounter;
+    }
 
-
-    private int ticketid;
+    private int ticketCounter= 0;
 
     public Ticket issueTicket(Vehicle vehicle, Gate gate) {
 
@@ -31,17 +38,33 @@ public class TicketService {
 
         SpotAssignmentStrategy spotAssignmentStrategy = SpotAssignmentStrategyFactory.getSpotAssignmentStrategy(SpotAssignmentStrategyType.RANDOM);
 
-        ParkingSpot parkingSpot = spotAssignmentStrategy.assignSpot(vehicle.getVehicletype());
+        ParkingSpot parkingSpot = spotAssignmentStrategy.assignSpot(vehicle);
 
-        Ticket ticket = new Ticket();
 
-        ticket.setVehicle(vehicle);
-        ticket.setGate(gate);
-        ticket.setParkingSpot(parkingSpot);
+        if (parkingSpot != null) {
+            parkingSpot.setOccupied(true);
+        } else{
+            throw new RuntimeException("Parking Spot not found");
+        }
+
+
+        ticketCounter++;
+
+        Ticket ticket = new Ticket(
+                ticketCounter,
+                TicketStatus.OPEN,
+                vehicle,
+                parkingSpot,
+                LocalDateTime.now(),
+                gate
+        );
 
         ticketRepo.save(ticket);
 
+
+
         return ticket;
+
 
     }
 

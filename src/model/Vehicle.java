@@ -3,37 +3,29 @@ package model;
 import enums.VehicleType;
 
 public class Vehicle {
-    private String id;
-    private String name;
-    private VehicleType vehicletype;
 
-    public Vehicle(String id, String name, VehicleType vehicletype) {
-        this.id = id;
-        this.name = name;
-        this.vehicletype = vehicletype;
+    private String vehicleId;
+    private VehicleType vehicleType;
+
+    public Vehicle(String vehicleId, VehicleType vehicleType) {
+        this.vehicleId = vehicleId;
+        this.vehicleType = vehicleType;
     }
 
-    public String getId() {
-        return id;
+
+    public String getVehicleId() {
+        return vehicleId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setVehicleId(String vehicleId) {
+        this.vehicleId = vehicleId;
     }
 
-    public String getName() {
-        return name;
+    public VehicleType getVehicleType() {
+        return vehicleType;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public VehicleType getVehicletype() {
-        return vehicletype;
-    }
-
-    public void setVehicletype(VehicleType vehicletype) {
-        this.vehicletype = vehicletype;
+    public void setVehicleType(VehicleType vehicleType) {
+        this.vehicleType = vehicleType;
     }
 }

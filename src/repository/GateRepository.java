@@ -3,18 +3,14 @@ package repository;
 import model.Gate;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class GateRepository {
 
     private final Map<Integer, Gate> gateMap = new HashMap<>();
-    public Gate getGate(int id) {
-        return gateMap.get(id);
-    }
 
-    private int gateId;
-
-    public void setId(int id) {}
+    private int gateId =0;
 
     public void addGate(Gate gate) {
 

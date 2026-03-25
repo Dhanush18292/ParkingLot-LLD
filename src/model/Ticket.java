@@ -1,30 +1,45 @@
 package model;
 
+import enums.TicketStatus;
+
 import java.time.LocalDateTime;
 
 public class Ticket {
 
-    private int id;
-    private Gate gate;
+
+    private int ticketId;
+    private TicketStatus ticketStatus;
     private Vehicle vehicle;
     private ParkingSpot parkingSpot;
     private LocalDateTime entryTime;
     private LocalDateTime exitTime;
+    private Gate entryGate;
+    private Gate exitGate;
 
-    public int getId() {
-        return id;
+    public Ticket(int ticketId, TicketStatus ticketStatus, Vehicle vehicle,ParkingSpot parkingSpot, LocalDateTime entryTime, Gate entryGate) {
+        this.ticketId = ticketId;
+        this.ticketStatus = ticketStatus;
+        this.vehicle = vehicle;
+        this.parkingSpot = parkingSpot;
+        this.entryTime = entryTime;
+        this.entryGate = entryGate;
     }
 
-    public void setId(int id) {
-        this.id = id;
+
+    public int getTicketId() {
+        return ticketId;
     }
 
-    public Gate getGate() {
-        return gate;
+    public void setTicketId(int ticketId) {
+        this.ticketId = ticketId;
     }
 
-    public void setGate(Gate gate) {
-        this.gate = gate;
+    public TicketStatus getTicketStatus() {
+        return ticketStatus;
+    }
+
+    public void setTicketStatus(TicketStatus ticketStatus) {
+        this.ticketStatus = ticketStatus;
     }
 
     public Vehicle getVehicle() {
@@ -33,14 +48,6 @@ public class Ticket {
 
     public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
-    }
-
-    public ParkingSpot getParkingSpot() {
-        return parkingSpot;
-    }
-
-    public void setParkingSpot(ParkingSpot parkingSpot) {
-        this.parkingSpot = parkingSpot;
     }
 
     public LocalDateTime getEntryTime() {
@@ -57,5 +64,21 @@ public class Ticket {
 
     public void setExitTime(LocalDateTime exitTime) {
         this.exitTime = exitTime;
+    }
+
+    public Gate getEntryGate() {
+        return entryGate;
+    }
+
+    public void setEntryGate(Gate entryGate) {
+        this.entryGate = entryGate;
+    }
+
+    public Gate getExitGate() {
+        return exitGate;
+    }
+
+    public void setExitGate(Gate exitGate) {
+        this.exitGate = exitGate;
     }
 }
